@@ -1,0 +1,19 @@
+# Ignorisanje Node.js dependency foldera
+node_modules/
+
+# Ignorisanje Python keširanih fajlova
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignorisanje VS Code foldera
+.vscode/
+
+# Ignorisanje sistemskih fajlova
+.DS_Store
+Thumbs.db
+
+# Ignorisanje build fajlova (ako koristiš)
+dist/
+build/
