@@ -1,4 +1,5 @@
-
+let token = sessionStorage.getItem("token");
+let rola = sessionStorage.getItem("rola");
 
 
 if (!sessionStorage.getItem("dozvoljen_pristup") && !localStorage.getItem("zapamti")) {
@@ -7,19 +8,7 @@ if (!sessionStorage.getItem("dozvoljen_pristup") && !localStorage.getItem("zapam
 }
 
 window.onload = function(e) {
-    const zapamti = localStorage.getItem("zapamti");
-    if(zapamti === "true"){
-        console.log(zapamti);
-        localStorage.setItem("tt", sessionStorage.getItem("token"));
-        localStorage.setItem("rr", sessionStorage.getItem("rola"));
-    }
-    else{
-        localStorage.clear();
-    }
-   
     
-
-
     if (!token) {
         // Ako rola ne postoji, preusmeri korisnika na login stranicu
         window.location.href = "index.html"; 
@@ -39,13 +28,11 @@ window.onload = function(e) {
 
 const dugmeOdkljucaj = document.querySelector(".odkljucavanje");
 
-let token = sessionStorage.getItem("token");
-let rola = sessionStorage.getItem("rola");
+
 
 dugmeOdkljucaj.addEventListener("click", async function(e) {
     let tokenn = sessionStorage.getItem("token");
     if (!tokenn) {
-        
         // Ako rola ne postoji, preusmeri korisnika na login stranicu
         window.location.href = "index.html"; 
     }
@@ -84,17 +71,15 @@ dugmeOdkljucaj.addEventListener("click", async function(e) {
 });
 
 
-document.querySelector(".fa-sign-out").addEventListener("click", function(){
-    localStorage.clear();
-    sessionStorage.clear();
-    window.location.href = "index.html";
-})
+
 
 
 setInterval(() => {
     sessionStorage.clear();
+    localStorage.clear();
+    window.location.href = "index.html";
     console.log("localStorage je očišćen.");
-  }, 60 * 60 * 1000);  
+  }, 600 * 60 * 1000);  
   
 
 

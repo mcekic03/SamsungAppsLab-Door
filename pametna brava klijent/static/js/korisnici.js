@@ -200,6 +200,7 @@ window.onload = async function() {
     
     setInterval(() => {
         sessionStorage.clear();
+        localStorage.clear();
         console.log("localStorage je očišćen.");
       }, 14 * 60 * 1000);  
 

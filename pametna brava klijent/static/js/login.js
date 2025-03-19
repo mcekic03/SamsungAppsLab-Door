@@ -1,20 +1,8 @@
 
 
 window.onload = function(){
-    if(localStorage.getItem("brisi")){
-        localStorage.clear();
-        sessionStorage.clear();
-    }
-    if(localStorage.getItem("zapamti")){
-        sessionStorage.setItem("token", localStorage.getItem("tt"));
-        sessionStorage.setItem("rola", localStorage.getItem("rr"));
-        sessionStorage.setItem("dozvoljen_pristup", "da");
-        window.location.href = "app.html";
-    }
-    else{
-        sessionStorage.clear();
-        localStorage.clear();
-    }
+    sessionStorage.clear();
+    localStorage.clear();
     
 }
 
@@ -28,9 +16,6 @@ document.addEventListener("keydown", function(event) {
 document.getElementById("loginButton").addEventListener("click", async function() {
     const email = document.getElementById("email").value;
     const lozinka = document.getElementById("password").value;
-    const zapamti = document.getElementsByClassName("zapamti")[0].checked;
-    localStorage.setItem("zapamti", zapamti);
-    
     if(email === "guest" && lozinka === "guest"){
         try {
             const response = await fetch('http://samsungappslab.vtsnis.edu.rs:3000/gosti-dozvola', {
