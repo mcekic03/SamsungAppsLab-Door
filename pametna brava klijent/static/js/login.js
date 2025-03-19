@@ -1,13 +1,35 @@
 
 
 window.onload = function(){
-    localStorage.clear();
+    if(localStorage.getItem("brisi")){
+        localStorage.clear();
+        sessionStorage.clear();
+    }
+    if(localStorage.getItem("zapamti")){
+        sessionStorage.setItem("token", localStorage.getItem("tt"));
+        sessionStorage.setItem("rola", localStorage.getItem("rr"));
+        sessionStorage.setItem("dozvoljen_pristup", "da");
+        window.location.href = "app.html";
+    }
+    else{
+        sessionStorage.clear();
+        localStorage.clear();
+    }
+    
 }
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        document.getElementById("loginButton").click(); // Simulira klik na dugme
+    }
+});
 
 
 document.getElementById("loginButton").addEventListener("click", async function() {
     const email = document.getElementById("email").value;
     const lozinka = document.getElementById("password").value;
+    const zapamti = document.getElementsByClassName("zapamti")[0].checked;
+    localStorage.setItem("zapamti", zapamti);
     
     if(email === "guest" && lozinka === "guest"){
         try {
@@ -30,7 +52,7 @@ document.getElementById("loginButton").addEventListener("click", async function(
                 alert("Nemate pristup kao gost, zatrazite pristup od administratora")
             }
             else{
-                localStorage.setItem("dozvoljen_pristup", "da");
+                sessionStorage.setItem("dozvoljen_pristup", "da");
                 window.location.href = "gosti.html";
             }
 
@@ -54,9 +76,9 @@ document.getElementById("loginButton").addEventListener("click", async function(
         
         if (response.ok) {
             // Možeš sačuvati token u localStorage ili sessionStorage
-            localStorage.setItem("token", data.access_token);
-            localStorage.setItem("rola", data.rola);
-            localStorage.setItem("dozvoljen_pristup", "da");
+            sessionStorage.setItem("token", data.access_token);
+            sessionStorage.setItem("rola", data.rola);
+            sessionStorage.setItem("dozvoljen_pristup", "da");
             window.location.href = "app.html";
         } else {
             alert("Greška: " + data.message);

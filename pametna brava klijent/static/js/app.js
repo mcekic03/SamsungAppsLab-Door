@@ -1,13 +1,25 @@
 
-let token = localStorage.getItem("token");
-let rola = localStorage.getItem("rola");
 
-if (!localStorage.getItem("dozvoljen_pristup")) {
+
+if (!sessionStorage.getItem("dozvoljen_pristup") && !localStorage.getItem("zapamti")) {
     console.log("Nemate dozvolu za pristup ovoj stranici!");
     window.location.href = "index.html";  // Preusmeravanje na početnu stranicu
 }
 
 window.onload = function(e) {
+    const zapamti = localStorage.getItem("zapamti");
+    if(zapamti === "true"){
+        console.log(zapamti);
+        localStorage.setItem("tt", sessionStorage.getItem("token"));
+        localStorage.setItem("rr", sessionStorage.getItem("rola"));
+    }
+    else{
+        localStorage.clear();
+    }
+   
+    
+
+
     if (!token) {
         // Ako rola ne postoji, preusmeri korisnika na login stranicu
         window.location.href = "index.html"; 
@@ -27,10 +39,11 @@ window.onload = function(e) {
 
 const dugmeOdkljucaj = document.querySelector(".odkljucavanje");
 
-
+let token = sessionStorage.getItem("token");
+let rola = sessionStorage.getItem("rola");
 
 dugmeOdkljucaj.addEventListener("click", async function(e) {
-    let tokenn = localStorage.getItem("token");
+    let tokenn = sessionStorage.getItem("token");
     if (!tokenn) {
         
         // Ako rola ne postoji, preusmeri korisnika na login stranicu
@@ -51,7 +64,7 @@ dugmeOdkljucaj.addEventListener("click", async function(e) {
     
         const data = await response.json();
         if(data.msg === "Token has expired"){
-            localStorage.clear();
+            sessionStorage.clear();
             window.location.href = "index.html";
         }
         
@@ -71,8 +84,15 @@ dugmeOdkljucaj.addEventListener("click", async function(e) {
 });
 
 
-setInterval(() => {
+document.querySelector(".fa-sign-out").addEventListener("click", function(){
     localStorage.clear();
+    sessionStorage.clear();
+    window.location.href = "index.html";
+})
+
+
+setInterval(() => {
+    sessionStorage.clear();
     console.log("localStorage je očišćen.");
   }, 60 * 60 * 1000);  
   

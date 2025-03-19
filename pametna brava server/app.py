@@ -16,7 +16,7 @@ app = Flask(__name__)
 CORS(app, supports_credentials=True)
 
 app.config['JWT_SECRET_KEY'] = 'tvoj_tajni_jwt_kljuc'
-app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=24)
 jwt = JWTManager(app)
 
 @app.before_request

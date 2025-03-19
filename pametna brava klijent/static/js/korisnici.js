@@ -1,10 +1,10 @@
 'use strict';
 
-let token = localStorage.getItem("token");
+let token = sessionStorage.getItem("token");
 const tabelaBody = document.getElementById('korisniciTabela');
 tabelaBody.innerHTML = '';  // Očisti tabelu pre nego što dodaš nove redove
 
-if (!localStorage.getItem("dozvoljen_pristup")) {
+if (!sessionStorage.getItem("dozvoljen_pristup")) {
     console.log("Nemate dozvolu za pristup ovoj stranici!");
     window.location.href = "index.html";  // Preusmeravanje na početnu stranicu
 }
@@ -23,7 +23,7 @@ document.querySelector("#gostiomoguci").addEventListener("click", async function
     });
 
     const data = await response.json();
-    localStorage.setItem("gostionica", data.message);
+    sessionStorage.setItem("gostionica", data.message);
     
     
     if (response.ok) {
@@ -39,8 +39,9 @@ document.querySelector("#gostiomoguci").addEventListener("click", async function
 
 
 window.onload = async function() {
-    let tokenn = localStorage.getItem("token");
+    let tokenn = sessionStorage.getItem("token");
     if (!tokenn) {
+
         // Ako rola ne postoji, preusmeri korisnika na login stranicu
         window.location.href = "index.html"; 
     }
@@ -68,7 +69,7 @@ window.onload = async function() {
             else{
                 document.querySelector(".span1").classList.remove("oo");
                 document.querySelector(".span2").classList.add("oo");
-                localStorage.setItem("dozvoljen_pristup", "da");
+                sessionStorage.setItem("dozvoljen_pristup", "da");
             }
 
 
@@ -142,7 +143,7 @@ window.onload = async function() {
     // Dodajemo event listener za sva dugmad
     document.addEventListener("DOMContentLoaded", function () {
         document.body.addEventListener("click", function (event) {
-            let tokennn = localStorage.getItem("token");
+            let tokennn = sessionStorage.getItem("token");
             if (!tokennn) {
                 // Ako rola ne postoji, preusmeri korisnika na login stranicu
                 window.location.href = "index.html"; 
@@ -156,7 +157,7 @@ window.onload = async function() {
             if (!korisnikId) return; // Ako nema data-value, izlazimo
     
             // Čuvanje u LocalStorage
-            localStorage.setItem("korisnikId", korisnikId);
+            sessionStorage.setItem("korisnikId", korisnikId);
     
             // Provera koji je button kliknut i preusmeravanje
             if (button.classList.contains("izmenaB")) {
@@ -195,10 +196,10 @@ window.onload = async function() {
         });
     });
 
-    localStorage.setItem("sort","desc");
+    sessionStorage.setItem("sort","desc");
     
     setInterval(() => {
-        localStorage.clear();
+        sessionStorage.clear();
         console.log("localStorage je očišćen.");
       }, 14 * 60 * 1000);  
 

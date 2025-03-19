@@ -1,8 +1,8 @@
 'use strict'
 
-let token = localStorage.getItem("token");
+let token = sessionStorage.getItem("token");
 
-if (!localStorage.getItem("dozvoljen_pristup")) {
+if (!sessionStorage.getItem("dozvoljen_pristup")) {
     console.log("Nemate dozvolu za pristup ovoj stranici!");
     window.location.href = "index.html";  // Preusmeravanje na početnu stranicu
 }
@@ -10,7 +10,7 @@ if (!localStorage.getItem("dozvoljen_pristup")) {
 
 
 window.onload = function(){
-    let tokennn = localStorage.getItem("token");
+    let tokennn = sessionStorage.getItem("token");
     if (!tokennn) {
         // Ako rola ne postoji, preusmeri korisnika na login stranicu
         window.location.href = "index.html"; 
@@ -19,7 +19,7 @@ window.onload = function(){
 
 document.querySelector("#forma").addEventListener("submit",async function(event) {
     event.preventDefault(); // Sprečava podrazumevano slanje forme
-    let tokenn = localStorage.getItem("token");
+    let tokenn = sessionStorage.getItem("token");
     if (!tokenn) {
         // Ako rola ne postoji, preusmeri korisnika na login stranicu
         window.location.href = "index.html"; 
@@ -57,6 +57,6 @@ document.querySelector("#forma").addEventListener("submit",async function(event)
 });
 
 setInterval(() => {
-    localStorage.clear();
+    sessionStorage.clear();
     console.log("localStorage je očišćen.");
   }, 14 * 60 * 1000);  

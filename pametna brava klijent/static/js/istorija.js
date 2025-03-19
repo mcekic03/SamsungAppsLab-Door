@@ -1,12 +1,12 @@
 'use strict'
-let token = localStorage.getItem("token");
+let token = sessionStorage.getItem("token");
 const ime = document.querySelector(".ime");
 const prezime = document.querySelector(".prezime");
 const tbody = document.querySelector("#inekcija");
-const idistorija = localStorage.getItem("korisnikId");
+const idistorija = sessionStorage.getItem("korisnikId");
 const sortiranje = document.querySelector(".h3");
 
-if (!localStorage.getItem("dozvoljen_pristup")) {
+if (!sessionStorage.getItem("dozvoljen_pristup")) {
     console.log("Nemate dozvolu za pristup ovoj stranici!");
     window.location.href = "index.html";  // Preusmeravanje na početnu stranicu
 }
@@ -15,12 +15,12 @@ if (!localStorage.getItem("dozvoljen_pristup")) {
 sortiranje.addEventListener("click", function(e){
     e.preventDefault();
 
-    let s = localStorage.getItem("sort");
+    let s = sessionStorage.getItem("sort");
     if(s === "desc"){
-        localStorage.setItem("sort","asc");
+        sessionStorage.setItem("sort","asc");
     }
     else{
-        localStorage.setItem("sort", "desc");
+        sessionStorage.setItem("sort", "desc");
     }
 
     window.location.href = "istorija.html";
@@ -30,7 +30,7 @@ sortiranje.addEventListener("click", function(e){
 
 
 window.onload = async function() {
-    let tokenn = localStorage.getItem("token");
+    let tokenn = sessionStorage.getItem("token");
     if (!tokenn) {
         // Ako rola ne postoji, preusmeri korisnika na login stranicu
         window.location.href = "index.html"; 
@@ -56,7 +56,7 @@ window.onload = async function() {
             ime.innerHTML = data.korisnik[0].ime;
             prezime.innerHTML = data.korisnik[0].prezime
     
-            let sortic = localStorage.getItem("sort");
+            let sortic = sessionStorage.getItem("sort");
             if(sortic === "desc"){
                 data.istorija.reverse();
             }

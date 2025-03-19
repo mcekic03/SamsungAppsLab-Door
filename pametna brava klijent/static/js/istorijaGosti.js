@@ -1,10 +1,10 @@
 'use strict'
-let token = localStorage.getItem("token");
+let token = sessionStorage.getItem("token");
 const tbody = document.querySelector("#inekcija");
-const idistorija = localStorage.getItem("korisnikId");
+const idistorija = sessionStorage.getItem("korisnikId");
 const sortiranje = document.querySelector(".h3");
-localStorage.setItem("sortg","desc");
-if (!localStorage.getItem("dozvoljen_pristup")) {
+sessionStorage.setItem("sortg","desc");
+if (!sessionStorage.getItem("dozvoljen_pristup")) {
     console.log("Nemate dozvolu za pristup ovoj stranici!");
     window.location.href = "index.html";  // Preusmeravanje na početnu stranicu
 }
